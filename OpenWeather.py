@@ -1,11 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
-    <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
-    </dependencies>
-    <objects>
-        <customObject id="-2" userLabel="File's Owner"/>
-        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-    </objects>
-</document>
+class OpenWeather:
+    def __init__(self, apiKey):
+        self._apiKey = apiKey
+        
+        def getTemperature():
+            response = requests.get('http://api.openweathermap.org/data/2.5/weather?id=2923544&units=metric&APPID=' + self._apiKey) #abcc6a6d692594e4c9524d7088d5184b
+        responseAsJson = response.json()
+        jsonNode = responseAsJson['main']
+        temperature     = float(jsonNode['temp'])
+        temperature_min = float(jsonNode['temp_min'])
+        temperature_max = float(jsonNode['temp_max'])
+        
+        return temperature, temperature_min, temperature_max
