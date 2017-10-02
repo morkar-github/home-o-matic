@@ -1,11 +1,26 @@
+from threading import Thread
 import Weather
+import GasCounter
 
 #this will be the home-o-matic master
-def __main__(self):
+if __name__ == "__main__":
+	print "Initializing..."
 	#gas
-    #GasCounter gasCounter(counterValue)
-	
-	#weather
-    weather = Weather(3)
+	print "HMC5883L GasCounter..."
+    	gasCounter = GasCounter.GasCounter(22534.3)
+	print "Starting loop..."
+	gasCounterThread = Thread(target = gasCounter.loop)
+	gasCounterThread.start()
+	print "done!"	
 
+	#weather
+    	print "TemperatureFetcher..."
+	weather = Weather.TemperatureFetcher(3)
+	print "Starting loop..."
+	weatherThread = Thread(target = weather.loop)
+    	weatherThread.start()
+	print "done!"
+
+	gasCounterThread.join()
+	weatherThread.join()
 
