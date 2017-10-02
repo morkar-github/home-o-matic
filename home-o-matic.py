@@ -7,7 +7,7 @@ if __name__ == "__main__":
 	print "Initializing..."
 	#gas
 	print "HMC5883L GasCounter..."
-    	gasCounter = GasCounter.GasCounter(22534.3)
+    	gasCounter = GasCounter.GasCounter(22519.36)
 	print "Starting loop..."
 	gasCounterThread = Thread(target = gasCounter.loop)
 	gasCounterThread.start()
